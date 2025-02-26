@@ -5,12 +5,16 @@ import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.spring_la_mia_pizzeria_relazioni.model.Pizza;
 import com.example.spring_la_mia_pizzeria_relazioni.model.SpecialOffers;
 import com.example.spring_la_mia_pizzeria_relazioni.service.PizzaService;
 import com.example.spring_la_mia_pizzeria_relazioni.service.SpecialOffersService;
-import org.springframework.web.bind.annotation.GetMapping;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class OffertaController {
@@ -22,10 +26,25 @@ public class OffertaController {
     @GetMapping("/{id}/offerta")
     public String offerta(@PathVariable Integer id, Model model) {
         SpecialOffers specialOffers = new SpecialOffers();
-        specialOffers.setPizzeFixedDiscount(pizzaService.findById(id));
+        Pizza pizza = pizzaService.findById(id);
+        specialOffers.getPizzeFixedDiscount().add(pizza);
+        specialOffers.getPizzePercentageDiscount().add(pizza);
         specialOffers.setDiscountStart(LocalDate.now());
+        System.out.println(specialOffers.discountStart);
         model.addAttribute("offerta", specialOffers);
-        return new String();
+        model.addAttribute("pizza", pizza);
+        return "offerta/offerta";
+    }
+
+    @PostMapping("/{id}/offerta")
+    public String offerta(@Valid @ModelAttribute("offerta") SpecialOffers formOfferta, BindingResult bindingResult,
+            RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            return "offerta/offerta";
+        }
+
+        return "redirect:/";
     }
 
 }

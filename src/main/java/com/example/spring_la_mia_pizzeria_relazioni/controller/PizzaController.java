@@ -1,6 +1,7 @@
 package com.example.spring_la_mia_pizzeria_relazioni.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -102,9 +103,7 @@ public class PizzaController {
         Pizza pizza = pizzaService.findById(id);
         if (pizza != null) {
             pizzaService.deleteById(id);
-            redirectAttributes.addFlashAttribute("message",
-                    "La pizza: " + pizza.getNome() + ", è stata cancellata con successo.");
-            redirectAttributes.addFlashAttribute("messageClass", "alert-danger");
+
         }
         return "redirect:/";
     }

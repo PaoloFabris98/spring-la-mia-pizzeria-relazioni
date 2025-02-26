@@ -58,7 +58,7 @@
                                 <div class="d-flex gap-2">
                                     <td>
                                         <div
-                                            th:insert="~{fragments/fragments :: offerte}">
+                                            th:insert="~{fragments/fragments :: offerte(${pizza.getId()} + '/offerta')}">
                                         </div>
                                     </td>
                                     <td>

@@ -1,6 +1,7 @@
 package com.example.spring_la_mia_pizzeria_relazioni.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -11,7 +12,6 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Past;
 
 @Entity
 public class SpecialOffers {
@@ -30,30 +30,29 @@ public class SpecialOffers {
     @Min(value = 0, message = "Il prezzo dev'essere superiore a 0")
     private int percentageDiscount;
 
-    @Past(message = "La data dell'inizio dello sconto non può essere nel passato")
     private LocalDate discountStart;
 
-    @Past(message = "La data della fine dello sconto non può essere nel passato")
     private LocalDate discountEnd;
 
     @OneToMany(mappedBy = "fixedDiscount")
-    private List<Pizza> pizzeFixedDiscount;
+    private List<Pizza> pizzeFixedDiscount = new ArrayList<>();
 
     @OneToMany(mappedBy = "percentageDiscount")
-    private List<Pizza> pizzePercentageDiscount;
+    private List<Pizza> pizzePercentageDiscount = new ArrayList<>();
 
     public SpecialOffers() {
     }
 
     public SpecialOffers(int id, String descrizione, int fixedDiscount, int percentageDiscount, LocalDate discountStart,
-            LocalDate discountEnd) {
+            LocalDate discountEnd, List<Pizza> pizzeFixedDiscount, List<Pizza> pizzePercentageDiscount) {
         this.id = id;
         this.descrizione = descrizione;
         this.fixedDiscount = fixedDiscount;
         this.percentageDiscount = percentageDiscount;
         this.discountStart = discountStart;
         this.discountEnd = discountEnd;
-
+        this.pizzeFixedDiscount = pizzeFixedDiscount;
+        this.pizzePercentageDiscount = pizzePercentageDiscount;
     }
 
     public int getId() {
@@ -89,7 +88,7 @@ public class SpecialOffers {
     }
 
     public LocalDate getDiscountStart() {
-        return this.discountStart;
+        return discountStart;
     }
 
     public void setDiscountStart(LocalDate discountStart) {
@@ -97,7 +96,7 @@ public class SpecialOffers {
     }
 
     public LocalDate getDiscountEnd() {
-        return this.discountEnd;
+        return discountEnd;
     }
 
     public void setDiscountEnd(LocalDate discountEnd) {
@@ -108,16 +107,16 @@ public class SpecialOffers {
         return this.pizzeFixedDiscount;
     }
 
-    public void setPizzeFixedDiscount(Pizza pizzaFixedDiscount) {
-        this.pizzeFixedDiscount.add(pizzaFixedDiscount);
+    public void setPizzeFixedDiscount(List<Pizza> pizzeFixedDiscount) {
+        this.pizzeFixedDiscount = pizzeFixedDiscount;
     }
 
     public List<Pizza> getPizzePercentageDiscount() {
         return this.pizzePercentageDiscount;
     }
 
-    public void setPizzePercentageDiscount(Pizza pizzaPercentageDiscount) {
-        this.pizzePercentageDiscount.add(pizzaPercentageDiscount);
+    public void setPizzePercentageDiscount(List<Pizza> pizzePercentageDiscount) {
+        this.pizzePercentageDiscount = pizzePercentageDiscount;
     }
 
 }

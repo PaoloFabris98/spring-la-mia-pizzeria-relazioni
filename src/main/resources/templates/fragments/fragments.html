@@ -20,7 +20,7 @@
         Edit
     </a>
 
-    <a th:fragment="offerte" class="btn btn-warning w-100 d-flex justify-content-center">
+    <a th:fragment="offerte(link)" th:href="@{${link}}" class="btn btn-warning w-100 d-flex justify-content-center">
         Offerta
     </a>
 </body>
