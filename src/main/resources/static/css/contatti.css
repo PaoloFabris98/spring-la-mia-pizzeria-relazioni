@@ -1,0 +1,30 @@
+body {
+    color: white;
+}
+.card-container {
+    max-width: 60rem;
+    margin: 50px auto;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.social-icons a {
+    transition: transform 0.3s ease;
+}
+.social-icons a:hover {
+    transform: scale(1.2);
+    color: #ffd700 !important;
+}
+.contact-info a {
+    transition: color 0.3s ease;
+}
+.contact-info a:hover {
+    color: #ffd700 !important;
+}
+.equal-height {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}

@@ -29,7 +29,10 @@
                                 <th>Descrizione</th>
                                 <th>Prezzo</th>
                                 <th>Allergeni</th>
-                                <th>Azioni</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,43 +55,58 @@
                                         )}"></div>
                                     </div>
                                 </td>
-                                <td>
-                                    <div class="d-flex gap-2">
-                                        <div th:insert="~{fragments/fragments :: buttons('/pizza', ${pizza.getNome()})}"></div>
-                                        <div th:insert="~{fragments/fragments :: buttonEdit('/edit/' + ${pizza.getId()})}"></div>
-
-                                        <!-- Modale di conferma eliminazione -->
+                                <div class="d-flex gap-2">
+                                    <td>
+                                        <div
+                                            th:insert="~{fragments/fragments :: offerte}">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div
+                                            th:insert="~{fragments/fragments :: buttons('/pizza', ${pizza.getNome()})}">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div
+                                            th:insert="~{fragments/fragments :: buttonEdit('/edit/' + ${pizza.getId()})}">
+                                        </div>
+                                    </td>
+                                    <!-- Modale di conferma eliminazione -->
+                                    <td>
                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                             th:data-bs-target="'#delete-modal-' + ${pizza.getId()}">
                                             Delete
                                         </button>
+                                    </td>
 
-                                        <div class="modal fade" th:id="'delete-modal-' + ${pizza.getId()}" tabindex="-1">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Conferma Eliminazione</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <p>Sei sicuro di voler cancellare la pizza: 
-                                                            <strong th:text="${pizza.getNome()}"></strong>?
-                                                        </p>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                            Annulla
-                                                        </button>
-                                                        <form th:action="@{/delete/{id}(id=${pizza.getId()})}" method="post">
-                                                            <button type="submit" class="btn btn-danger">Elimina</button>
-                                                        </form>
-                                                    </div>
+                                    <div class="modal fade" th:id="'delete-modal-' + ${pizza.getId()}" tabindex="-1">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Conferma Eliminazione</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Sei sicuro di voler cancellare la pizza:
+                                                        <strong th:text="${pizza.getNome()}"></strong>?
+                                                    </p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">
+                                                        Annulla
+                                                    </button>
+                                                    <form th:action="@{/delete/{id}(id=${pizza.getId()})}"
+                                                        method="post">
+                                                        <button type="submit" class="btn btn-danger">Elimina</button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- Fine modale -->
                                     </div>
+                                    <!-- Fine modale -->
+                                </div>
                                 </td>
                             </tr>
                         </tbody>

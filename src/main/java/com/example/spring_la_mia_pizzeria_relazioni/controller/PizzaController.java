@@ -15,12 +15,15 @@ import jakarta.validation.Valid;
 
 import com.example.spring_la_mia_pizzeria_relazioni.model.Pizza;
 import com.example.spring_la_mia_pizzeria_relazioni.service.PizzaService;
+import com.example.spring_la_mia_pizzeria_relazioni.service.SpecialOffersService;
 
 @Controller
 public class PizzaController {
 
     @Autowired
     private PizzaService pizzaService;
+    @Autowired
+    private SpecialOffersService specialOffersService;
 
     @GetMapping("/pizza")
     public String seePizza(@RequestParam(name = "query") String query, Model model, HttpServletRequest request) {
@@ -33,7 +36,7 @@ public class PizzaController {
             model.addAttribute("pizzas", pizza);
         }
 
-        return "pizza";
+        return "pizza/pizza";
     }
 
     @GetMapping("/searchPizza")
@@ -44,21 +47,21 @@ public class PizzaController {
         } else {
             model.addAttribute("currentURI", request.getRequestURI());
             model.addAttribute("pizzas", pizze);
-            return "pizza";
+            return "pizza/pizza";
         }
     }
 
     @GetMapping("/creaPizza")
     public String addPizza(Model model) {
         model.addAttribute("pizza", new Pizza());
-        return "addPizza";
+        return "addPizza/addPizza";
     }
 
     @PostMapping("/creaPizza")
     public String addPizza(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult,
             RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            return "addPizza";
+            return "addPizza/addPizza";
         }
 
         pizzaService.save(formPizza);
@@ -71,10 +74,10 @@ public class PizzaController {
 
     @GetMapping("/edit/{id}")
     public String editPizza(@PathVariable Integer id, Model model) {
-        Optional<Pizza> pizza = pizzaService.findById(id);
-        if (pizza.isPresent()) {
-            model.addAttribute("pizza", pizza.get());
-            return "editPizza";
+        Pizza pizza = pizzaService.findById(id);
+        if (pizza != null) {
+            model.addAttribute("pizza", pizza);
+            return "editPizza/editPizza";
         } else {
             return "redirect:/";
         }
@@ -84,7 +87,7 @@ public class PizzaController {
     public String editPizza(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult,
             RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            return "editPizza";
+            return "editPizza/seditPizza";
         }
 
         pizzaService.save(formPizza);
@@ -97,11 +100,11 @@ public class PizzaController {
 
     @PostMapping("/delete/{id}")
     public String deletePizza(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
-        Optional<Pizza> pizza = pizzaService.findById(id);
-        if (pizza.isPresent()) {
+        Pizza pizza = pizzaService.findById(id);
+        if (pizza != null) {
             pizzaService.deleteById(id);
             redirectAttributes.addFlashAttribute("message",
-                    "La pizza: " + pizza.get().getNome() + ", è stata cancellata con successo.");
+                    "La pizza: " + pizza.getNome() + ", è stata cancellata con successo.");
             redirectAttributes.addFlashAttribute("messageClass", "alert-danger");
         }
         return "redirect:/";

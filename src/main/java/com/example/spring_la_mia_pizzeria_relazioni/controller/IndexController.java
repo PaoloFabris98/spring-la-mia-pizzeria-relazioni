@@ -5,7 +5,8 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.example.spring_la_mia_pizzeria_relazioni.repository.PizzaRepository;
+import com.example.spring_la_mia_pizzeria_relazioni.service.PizzaService;
+import com.example.spring_la_mia_pizzeria_relazioni.service.SpecialOffersService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -14,23 +15,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IndexController {
 
     @Autowired
-    private PizzaRepository pizzaRepository;
+    private PizzaService pizzaService;
+
+    @Autowired
+    private SpecialOffersService specialOffersService;
 
     @GetMapping("/")
     public String index(Model model) {
-        if (pizzaRepository.findAll().size() == 0) {
-            model.addAttribute("pizzas", pizzaRepository.findAll());
+        if (pizzaService.findAll().size() == 0) {
+            model.addAttribute("pizzas", pizzaService.findAll());
             model.addAttribute("isValid", "false");
         } else {
-            model.addAttribute("pizzas", pizzaRepository.findAll());
+            model.addAttribute("pizzas", pizzaService.findAll());
             model.addAttribute("isValid", "true");
         }
         ;
-        return "index";
+        return "index/index";
     }
 
     @GetMapping("/contatti")
     public String contatti(Model model) {
-        return "contatti";
+        return "contatti/contatti";
     }
 }

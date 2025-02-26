@@ -9,5 +9,7 @@ import com.example.spring_la_mia_pizzeria_relazioni.model.Pizza;
 
 @Repository
 public interface PizzaRepository extends JpaRepository<Pizza, Integer> {
+    public Pizza findById(int id);
+
     public List<Pizza> findByNomeContaining(String name);
 }

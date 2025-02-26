@@ -108,16 +108,16 @@ public class SpecialOffers {
         return this.pizzeFixedDiscount;
     }
 
-    public void setPizzeFixedDiscount(List<Pizza> pizzeFixedDiscount) {
-        this.pizzeFixedDiscount = pizzeFixedDiscount;
+    public void setPizzeFixedDiscount(Pizza pizzaFixedDiscount) {
+        this.pizzeFixedDiscount.add(pizzaFixedDiscount);
     }
 
     public List<Pizza> getPizzePercentageDiscount() {
         return this.pizzePercentageDiscount;
     }
 
-    public void setPizzePercentageDiscount(List<Pizza> pizzePercentageDiscount) {
-        this.pizzePercentageDiscount = pizzePercentageDiscount;
+    public void setPizzePercentageDiscount(Pizza pizzaPercentageDiscount) {
+        this.pizzePercentageDiscount.add(pizzaPercentageDiscount);
     }
 
 }
