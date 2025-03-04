@@ -12,7 +12,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
@@ -23,7 +22,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 
 @Entity
-public class Ingrediente {
+public class Allergene {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,18 +34,16 @@ public class Ingrediente {
     @NotEmpty
     private String tipo;
 
-    @ManyToMany(mappedBy = "ingredienti")
-    private List<Pizza> pizze;
+    @ManyToMany(mappedBy = "allergeni")
+    private List<Ingrediente> ingredienti;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "allergene_ingrediente", joinColumns = @JoinColumn(name = "allergene_id"), inverseJoinColumns = @JoinColumn(name = "ingrediente_id"))
-    private List<Allergene> allergeni;
-
-    public Ingrediente() {
+    public Allergene() {
     }
 
-    public Ingrediente(String nomeIngrediente) {
-        this.nome = nomeIngrediente;
+    public Allergene(int id, String nome, List<Ingrediente> ingredienti) {
+        this.id = id;
+        this.nome = nome;
+        this.ingredienti = ingredienti;
     }
 
     public int getId() {
@@ -65,16 +62,12 @@ public class Ingrediente {
         this.nome = nome;
     }
 
-    public List<Pizza> getPizze() {
-        return this.pizze;
+    public List<Ingrediente> getIngredienti() {
+        return this.ingredienti;
     }
 
-    public void setPizze(List<Pizza> pizze) {
-        this.pizze = pizze;
+    public void setIngredienti(List<Ingrediente> ingredienti) {
+        this.ingredienti = ingredienti;
     }
 
-    @Override
-    public String toString() {
-        return this.nome;
-    }
 }
