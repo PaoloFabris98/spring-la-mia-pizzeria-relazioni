@@ -20,7 +20,7 @@ public class Pizza {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @NotBlank(message = "Il nome non può essere vuoto")
     private String nome;
@@ -35,7 +35,7 @@ public class Pizza {
     @Min(value = 1, message = "Il prezzo dev'essere superiore a 0 e almeno di 1 euro")
     private double prezzo;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "ingrediente_pizza", joinColumns = @JoinColumn(name = "pizza_id"), inverseJoinColumns = @JoinColumn(name = "ingrediente_id"))
     private List<Ingrediente> ingredienti;
 
@@ -237,4 +237,8 @@ public class Pizza {
         this.senape = senape;
     }
 
+    @Override
+    public String toString() {
+        return this.getNome();
+    }
 }

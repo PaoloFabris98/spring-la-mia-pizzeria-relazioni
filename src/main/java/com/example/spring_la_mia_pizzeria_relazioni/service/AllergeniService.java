@@ -13,7 +13,7 @@ public class AllergeniService {
     @Autowired
     private AllergeniRepository allergeniRepository;
 
-    public Allergene creaIngrediente(Allergene allergene) {
+    public Allergene creaAllergene(Allergene allergene) {
         return allergeniRepository.save(allergene);
     }
 

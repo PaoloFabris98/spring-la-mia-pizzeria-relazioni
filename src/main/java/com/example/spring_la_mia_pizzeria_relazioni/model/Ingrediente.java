@@ -32,13 +32,13 @@ public class Ingrediente {
     @NotEmpty
     private String nome;
 
-    @NotEmpty
-    private String tipo;
+    // @NotEmpty
+    // private String tipo;
 
     @ManyToMany(mappedBy = "ingredienti")
     private List<Pizza> pizze;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "allergene_ingrediente", joinColumns = @JoinColumn(name = "allergene_id"), inverseJoinColumns = @JoinColumn(name = "ingrediente_id"))
     private List<Allergene> allergeni;
 
@@ -65,13 +65,15 @@ public class Ingrediente {
         this.nome = nome;
     }
 
-    public List<Pizza> getPizze() {
-        return this.pizze;
-    }
-
-    public void setPizze(List<Pizza> pizze) {
-        this.pizze = pizze;
-    }
+    /*
+     * public List<Pizza> getPizze() {
+     * return this.pizze;
+     * }
+     * 
+     * public void setPizze(List<Pizza> pizze) {
+     * this.pizze = pizze;
+     * }
+     */
 
     @Override
     public String toString() {

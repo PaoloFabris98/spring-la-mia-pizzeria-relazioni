@@ -31,8 +31,7 @@ public class Allergene {
     @NotEmpty
     private String nome;
 
-    @NotEmpty
-    private String tipo;
+    private String img;
 
     @ManyToMany(mappedBy = "allergeni")
     private List<Ingrediente> ingredienti;
@@ -40,10 +39,10 @@ public class Allergene {
     public Allergene() {
     }
 
-    public Allergene(int id, String nome, List<Ingrediente> ingredienti) {
+    public Allergene(int id, String nome, String img) {
         this.id = id;
         this.nome = nome;
-        this.ingredienti = ingredienti;
+        this.img = img;
     }
 
     public int getId() {
@@ -62,12 +61,12 @@ public class Allergene {
         this.nome = nome;
     }
 
-    public List<Ingrediente> getIngredienti() {
-        return this.ingredienti;
+    public String getImg() {
+        return this.img;
     }
 
-    public void setIngredienti(List<Ingrediente> ingredienti) {
-        this.ingredienti = ingredienti;
+    public void setImg(String img) {
+        this.img = img;
     }
 
 }

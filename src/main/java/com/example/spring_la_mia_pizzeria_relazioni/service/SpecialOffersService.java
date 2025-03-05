@@ -13,7 +13,6 @@ public class SpecialOffersService {
     @Autowired
     private SpecialOffersReporitory specialOffersReporitory;
 
-    @Transactional
     public SpecialOffers create(SpecialOffers offerta) {
         return specialOffersReporitory.save(offerta);
     }

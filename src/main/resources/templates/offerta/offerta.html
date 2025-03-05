@@ -15,8 +15,10 @@
         <div class="p-3 bg-dark text-white">
             <div th:insert="~{fragments/navbar :: navBar}"></div>
         </div>
+        <h1 th:text="${offerta.pizza}"></h1>
         <div>
-            <form th:action="@{/creaOfferta/{id}(id=${offerta.Pizza.Id})}" method="post" id="addPizza-form" th:object="${pizza}" class="bg-dark text-white container">
+            <form th:action="@{/creaOfferta/{id}(id=${offerta.pizza.Id})}" method="post" id="addPizza-form" class="bg-dark text-white container">
+                <input type="hidden" th:field="${offerta.pizza}">
 
                 <div class="m-3 p-2">
                     <label for="Sconto" class="form-label">Sconto</label>
