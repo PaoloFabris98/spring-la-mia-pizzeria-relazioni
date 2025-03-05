@@ -34,6 +34,12 @@
                                     </ul>
                                 </div>
                             </div>
+                            <div class="m-3 p-2">
+                                <label for="imgs" class="form-label">Immagine</label>
+                                <input class="form-control" type="text" id="imgs" th:field="*{img}"
+                                    placeholder="Aggiungi una foto alla tua pizza" th:errorClass="is-invalid">
+
+                            </div>
 
                             <input type="submit" value="Aggiungi Ingrediente" class="btn btn-primary m-3 p-2">
                             <input type="reset" value="Reset" class="btn btn-warning m-3 p-2">

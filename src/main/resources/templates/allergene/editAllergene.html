@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <div>
-                            <form th:action="@{|/edit/${id}|}" method="post" id="addPizza-form" th:object="${pizza}"
+                            <form th:action="@{|/editAllergene/${id}|}" method="post" id="editAllergene-form" th:object="${allergene}"
                                 class="bg-dark text-white">
                                 <div class="m-3 p-2">
                                     <label for="Nome" class="form-label">Nome Allergene</label>
@@ -36,12 +36,12 @@
                                     </div>
                                 </div>
                                 <div class="m-3 p-2">
-                                    <label for="Foto" class="form-label">Immagine</label>
-                                    <input class="form-control" type="text" id="Foto" th:field="*{foto}"
+                                    <label for="img" class="form-label">Immagine</label>
+                                    <input class="form-control" type="text" id="img" th:field="*{img}"
                                         placeholder="Aggiungi una foto alla tua pizza" th:errorClass="is-invalid">
-                                    <div th:if="${#fields.hasErrors('foto')}" class="invalid-feedback">
+                                    <div th:if="${#fields.hasErrors('img')}" class="invalid-feedback">
                                         <ul>
-                                            <li th:each="error: ${#fields.errors('foto')}" th:text="${error}"></li>
+                                            <li th:each="error: ${#fields.errors('img')}" th:text="${error}"></li>
                                         </ul>
                                     </div>
                                 </div>
